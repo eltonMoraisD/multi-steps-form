@@ -1,4 +1,4 @@
-import { IUser } from "@/types/IUser";
+import { IUser } from "@/types/types";
 
 export const fetchUser = (): Promise<IUser> => {
   return new Promise((res) => {

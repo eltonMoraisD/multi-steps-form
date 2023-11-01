@@ -11,3 +11,13 @@ export interface IUser {
     country: String;
   };
 }
+
+export interface IInputs {
+  placeholder: string;
+  type: string;
+}
+
+export interface IButtons {
+  children: React.ReactNode;
+  type: "button" | "submit" | "reset" | undefined;
+}
