@@ -1,6 +1,6 @@
 import React from 'react'
 import "./style.css"
-import Form from '../Form'
+
 
 export default function Steps() {
   const steps = ["fetch user", "user", "adress"]
@@ -11,12 +11,11 @@ export default function Steps() {
           {steps.map((step, i) => (
             <div key={i} className={`custom-step mx-2 active`}>
               <div className='step'>{i + 1}</div>
-              <span className=''>{step}</span>
+              <span>{step}</span>
             </div>
           ))}
         </div>
       </div>
-
     </>
   )
 }

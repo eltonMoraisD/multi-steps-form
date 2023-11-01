@@ -1,6 +1,6 @@
 import { IUser } from "@/types/types";
 
-export const fetchUser = (): Promise<IUser> => {
+export const fetchUser = (): Promise<{ data: IUser }> => {
   return new Promise((res) => {
     setTimeout(() => {
       res({
