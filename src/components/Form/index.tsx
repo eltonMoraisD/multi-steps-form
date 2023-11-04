@@ -1,17 +1,16 @@
-import { useContext } from 'react'
-
+"use client"
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { userSchema } from './schemaValidations'
-import { IFormContext, IStepsContext, IUser } from '@/types/types'
-import { StepsContext } from '@/context/StepsContext'
+import { IUser } from '@/types/types'
+import { useStepsContext } from '@/context/StepsContext'
 
 import Input from '../Input'
 import Button from '../Button'
 import ComboBox from '../Combobox'
-import { FormContext } from '@/context/FormContext'
+import { useFormContext } from '@/context/FormContext'
 
 import { steps } from '../Steps'
 
@@ -27,11 +26,9 @@ const getFieldNamesForStep = (stepNumber: number): (keyof IUser)[] => {
 };
 
 const Form: React.FC<{ users: IUser }> = ({ users }) => {
-  const stepContext = useContext(StepsContext)
-  const formContext = useContext(FormContext)
 
-  const { currentStep, moveToNextStep, moveToPreviousStep } = stepContext as IStepsContext
-  const { handleInputChange } = formContext as IFormContext
+  const { currentStep, moveToNextStep, moveToPreviousStep } = useStepsContext()
+  const { handleInputChange } = useFormContext()
 
   const {
     register,
@@ -61,7 +58,6 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
     if (!output) {
       return
     }
-
     if (currentStep < steps.length - 1) {
       moveToNextStep();
     }

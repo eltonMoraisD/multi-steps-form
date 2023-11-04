@@ -215,7 +215,11 @@ export interface IComboboxContext {
 const ComboboxContext = createContext<IComboboxContext | null>(null);
 
 const useComboboxContext = () => {
-  return useContext(ComboboxContext);
+  const context = useContext(ComboboxContext);
+  if (!context) {
+    throw new Error('useComboboxContext must be used within a FormProvider');
+  }
+  return context;
 };
 
 const ComboboxProvider = ({ children }: {

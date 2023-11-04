@@ -1,11 +1,21 @@
 "use client"
 import { IStepsContext } from '@/types/types'
 
-import { createContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 
-export const StepsContext = createContext<IStepsContext | null>(null)
+const StepsContext = createContext<IStepsContext | null>(null)
 
-export const StepsProvider = ({ children }: { children: React.ReactNode }) => {
+const useStepsContext = () => {
+  const context = useContext(StepsContext)
+
+  if (!context) {
+    throw new Error('useStepsContext must be used within a FormProvider');
+  }
+
+  return context
+}
+
+const StepsProvider = ({ children }: { children: React.ReactNode }) => {
   const [previousStep, setPreviousStep] = useState<number>(0)
   const [currentStep, setCurrentStep] = useState<number>(1)
 
@@ -34,3 +44,4 @@ export const StepsProvider = ({ children }: { children: React.ReactNode }) => {
 }
 
 
+export { StepsProvider, useStepsContext, StepsContext }

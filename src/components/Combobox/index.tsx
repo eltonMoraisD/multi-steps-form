@@ -1,16 +1,15 @@
 
-import { useContext } from "react";
-
 import { BiChevronDown } from "react-icons/bi";
 
-import { IComboboxContext, useComboboxContext } from "@/context/ComboboxContext";
-import { FormContext } from "@/context/FormContext";
+import { useComboboxContext } from "@/context/ComboboxContext";
+import { useFormContext } from "@/context/FormContext";
 
-import { IFormContext, IInputs } from "@/types/types";
+import { IInputs } from "@/types/types";
 
 const Combobox: React.FC<IInputs> = ({ error, register, name, type, placeholder, defaultValue }) => {
-  const comboboxContext = useComboboxContext();
-  const { updateUser, userApi, handleInputChange } = useContext(FormContext) as IFormContext
+
+  const { updateUser, userApi } = useFormContext()
+
   const {
     selected,
     open,
@@ -18,21 +17,22 @@ const Combobox: React.FC<IInputs> = ({ error, register, name, type, placeholder,
     setOpen,
     handleCountryClick,
     handleComboInputChange,
-  } = comboboxContext as IComboboxContext;
+  } = useComboboxContext();
 
   console.log(userApi)
 
   const setCountry = (country: string) => {
-    const updatedUser = { ...userApi, country };
-    handleInputChange({ target: { name: "country", value: country } } as React.ChangeEvent<HTMLInputElement>, null);
-    updateUser(updatedUser);
+    updateUser({ ...userApi, country });
   };
 
 
   return (
     <div className="relative w-full" onClick={() => setOpen(!open)}>
       <input
-        className='w-full border-b border border-gray-400 py-1 px-2 focus:outline-0 h-11 mt-2 pl-4'
+        className={
+          `w-full border-b border border-gray-400 py-1 px-2 focus:outline-0 h-11 mt-2 pl-4 
+          ${error && !selected ? "border-red-500 bg-red-200 placeholder:text-white" : "focus:outline-none"}`
+        }
         type={type}
         placeholder={placeholder}
         defaultValue={defaultValue as string}
