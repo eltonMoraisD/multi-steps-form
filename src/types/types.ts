@@ -1,4 +1,5 @@
-import { UseFormRegister, FieldValues, FieldErrors } from "react-hook-form";
+import { Dispatch, SetStateAction } from "react";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 
 export interface IUser {
   firstName: String;
@@ -16,11 +17,28 @@ export interface IInputs {
   placeholder: string;
   type: string;
   name: string;
-  register: UseFormRegister<any>;
+  defaultValue: String;
+  value?: string;
   error: any;
+  register: UseFormRegister<string | FieldValues | any>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface IButtons {
-  children: React.ReactNode;
-  type: "button" | "submit" | "reset" | undefined;
+export interface IFormContext {
+  userApi: IUser;
+  setUsersApi: Dispatch<SetStateAction<IUser>>;
+  isLoading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  updateUser: (updatedUserData: IUser) => void;
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    clear: any
+  ) => void;
+}
+
+export interface IStepsContext {
+  previousStep: number;
+  currentStep: number;
+  moveToNextStep: () => void;
+  moveToPreviousStep: () => void;
 }

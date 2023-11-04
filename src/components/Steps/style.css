@@ -1,15 +1,18 @@
 .custom-step {
-  @apply relative flex flex-col justify-center w-24 items-center  lg:w-80 xl:w-[250px] sm:w-60;
+  @apply relative flex flex-col justify-center w-16 2xl:w-36 1xl:w-40 md:w-28 xm:w-14  items-center ;
 }
 
 .custom-step:not(:first-child):before {
-  @apply content-[''] bg-blue-900 absolute w-full h-[3px] right-2/4 top-1/3 -translate-y-2/4;
+  @apply content-[''] bg-blue-900 absolute  w-full h-[2px] right-2/4 top-1/2 -translate-y-2/4;
 }
 
 .step {
-  @apply w-10 h-10 flex z-10 relative  text-white  bg-blue-900 rounded-full items-center justify-center font-semibold;
+  @apply w-10 h-10 xm:w-8 xm:h-8 flex z-10 relative  text-white  bg-blue-900 rounded-full items-center justify-center font-semibold;
 }
+
+
 
 .active .step{
   @apply bg-yellow-300 text-blue-900;
 }
+
