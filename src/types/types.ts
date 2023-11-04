@@ -8,7 +8,6 @@ export interface IUser {
   phone: String;
   address: String;
   city: String;
-  state: String;
   postcode: String;
   country: String;
 }

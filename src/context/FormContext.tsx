@@ -22,7 +22,6 @@ const FormProvider = ({ children }: { children: React.ReactNode }) => {
     phone: "",
     address: "",
     city: "",
-    state: "",
     postcode: "",
     country: "",
   })

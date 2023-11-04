@@ -11,7 +11,6 @@ export const fetchUser = (): Promise<{ data: IUser }> => {
           phone: "+352 123 456 789",
           address: "",
           city: "",
-          state: "",
           postcode: "",
           country: "Luxembourg",
         },
