@@ -32,7 +32,7 @@ export interface IFormContext {
   updateUser: (updatedUserData: IUser) => void;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
-    clear: any
+    clear?: any
   ) => void;
 }
 

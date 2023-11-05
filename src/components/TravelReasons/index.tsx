@@ -4,17 +4,14 @@ import { useFormContext } from '@/context/FormContext';
 import { IUser } from '@/types/types';
 import Input from '../Input';
 
-
 interface ITravelReasons {
   clearErrors?: any
   users?: IUser
   register: UseFormRegister<IUser>;
   errors: FieldErrors<IUser>;
-
 }
 
 const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, register }) => {
-  console.log("err", users?.termsAccepted)
   const { handleInputChange, userApi } = useFormContext();
 
   return (
@@ -24,8 +21,6 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
         <div className=''>
           <label className="  inline-flex items-center mr-2">
             <Input
-              // className={`form-checkbox  text-blue-900 ${errors.accountType && "outline-red-500"}`}
-              // {...register("accountType")}
               register={register}
               error={errors}
               type="radio"
@@ -40,13 +35,10 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
             <Input
               error={errors}
               type="radio"
-              // className="form-radio text-blue-900"
               value="business"
-              // {...register("accountType")}
               register={register}
               name='accountType'
               onChange={(e) => { handleInputChange(e, clearErrors()) }}
-
             />
             <span className="ml-2 mt-2 text-gray-700">Business</span>
 

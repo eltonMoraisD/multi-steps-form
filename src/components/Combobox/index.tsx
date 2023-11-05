@@ -19,11 +19,9 @@ const Combobox: React.FC<IInputs> = ({ error, register, name, type, placeholder,
     handleComboInputChange,
   } = useComboboxContext();
 
-
   const setCountry = (country: string) => {
     updateUser({ ...userApi, country });
   };
-
 
   return (
     <div className="relative w-full" onClick={() => setOpen(!open)}>

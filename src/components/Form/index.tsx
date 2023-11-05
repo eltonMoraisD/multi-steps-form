@@ -12,6 +12,7 @@ import { steps } from '../Steps'
 import TravelReasons from "../TravelReasons"
 import SecondStage from "../SecondStage"
 import ThirdStage from "../ThirdStage"
+import TableUser from "../TableUser"
 
 const getFieldNamesForStep = (stepNumber: number): (keyof IUser)[] => {
   switch (stepNumber) {
@@ -40,20 +41,16 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
 
   const submitValues: SubmitHandler<IUser> = (data) => {
     moveToNextStep()
-    getValues().termsAccepted = ""
     console.log("Submit", data);
   }
 
   const prev = () => {
     if (currentStep > 1) {
       moveToPreviousStep()
-      getValues().termsAccepted = ""
       reset(users)
     }
 
   }
-
-  console.log("getvalues", getValues())
 
   const next = async () => {
     const fields = getFieldNamesForStep(currentStep)
@@ -63,19 +60,15 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
       return
     }
 
-
     if (currentStep < steps.length - 1) {
       moveToNextStep();
       if (currentStep === steps.length - 1) {
         await handleSubmit(submitValues)()
-        getValues().termsAccepted = ""
         moveToNextStep();
-
       }
     }
 
   }
-  console.log("current step", currentStep)
   const StepsField = (step: number) => {
     switch (step) {
       case 2:
@@ -108,6 +101,10 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
             />
           </>
         );
+      case 5:
+        return (
+          <TableUser />
+        )
       default:
         return null;
     }
@@ -131,6 +128,7 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
           <Button
             onClick={next}
             type={currentStep === steps.length - 1 ? "submit" : "button"}
+            disabled={currentStep > steps.length - 1 && true}
           >
             {currentStep === steps.length - 1 ? "Submit" : <BsArrowRight />}
           </Button>

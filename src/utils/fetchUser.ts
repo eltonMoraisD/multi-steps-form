@@ -13,6 +13,8 @@ export const fetchUser = (): Promise<{ data: IUser }> => {
           city: "",
           postcode: "",
           country: "Luxembourg",
+          accountType: "",
+          termsAccepted: "",
         },
       });
     }, 1000);
