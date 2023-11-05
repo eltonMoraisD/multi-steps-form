@@ -8,7 +8,7 @@ export const fetchUser = (): Promise<{ data: IUser }> => {
           firstName: "Pippo",
           lastName: "Inzaghi",
           email: "",
-          phone: "+352 123 456 789",
+          phone: "+352123456789",
           address: "",
           city: "",
           postcode: "",

@@ -33,9 +33,9 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
           transition={transition}
         >
           <label className="  inline-flex items-center mr-2">
-            <Input
-              register={register}
-              error={errors}
+            <input
+              {...register("accountType")}
+              // error={errors}
               type="radio"
               value="personal"
               name='accountType'
@@ -45,18 +45,18 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
             <span className="ml-2 mt-2 text-gray-700">Personal</span>
           </label>
           <label className="inline-flex items-center">
-            <Input
-              error={errors}
+            <input
+              // error={errors}
               type="radio"
               value="business"
-              register={register}
+              {...register("accountType")}
               name='accountType'
               onChange={(e) => { handleInputChange(e, clearErrors()) }}
             />
             <span className="ml-2 mt-2 text-gray-700">Business</span>
 
           </label>
-          {errors && <p className='text-red-500  text-xs'>{errors?.accountType?.message}</p>}
+          {errors.accountType && <p className='text-red-500  text-xs'>{errors?.accountType?.message}</p>}
         </motion.div>
       </div>
       <motion.div
@@ -74,9 +74,9 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
             onChange={(e) => { handleInputChange(e, clearErrors()) }}
             value={userApi.termsAccepted as string}
           />
-          <span className="ml-2 text-gray-700">I accept the terms and conditions</span>
+          <span className="ml-2 text-gray-700">Accecpt terms and conditions</span>
         </label>
-        {errors && !users?.termsAccepted && <p className='text-red-500 mt text-xs'>{errors?.termsAccepted?.message}</p>}
+        {errors.termsAccepted && !users?.termsAccepted && <p className='text-red-500 mt text-xs'>{errors?.termsAccepted?.message}</p>}
       </motion.div>
     </div>
 

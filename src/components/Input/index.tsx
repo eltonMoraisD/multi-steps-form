@@ -13,7 +13,7 @@ const Input: React.FC<IInputs> = ({ onChange, register, value, placeholder, type
         type={type}
         value={value}
         className={
-          `w-full border-b border border-gray-400 py-1 px-2 focus:outline-0 h-11 mt-2 pl-4 
+          `w-full border-b border  border-gray-400 py-1 px-2 focus:outline-0 h-11 mt-2 pl-4 
           ${error ? "border-red-500 bg-red-200 placeholder:text-white" : "focus:outline-none"}`
         }
       >
