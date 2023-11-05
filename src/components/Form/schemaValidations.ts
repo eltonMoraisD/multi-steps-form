@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const phoneRegex = new RegExp(/^\+\d{3} \d{3} \d{3} \d{3}$/);
+const phoneRegex = new RegExp(/^\+\d{3}\d{3}\d{3}\d{3}$/);
 
 export const userSchema = z.object({
   firstName: z.string().min(1, "*required").max(30),

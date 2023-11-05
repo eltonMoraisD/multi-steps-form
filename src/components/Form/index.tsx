@@ -1,13 +1,13 @@
-"use client"
+// "use client"
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-
 import toast, { Toaster } from 'react-hot-toast';
 
 import { userSchema } from './schemaValidations'
 import { IUser } from '@/types/types'
 import { useStepsContext } from '@/context/StepsContext'
+import { useFormContext } from "@/context/FormContext";
 
 import Button from '../Button'
 import { steps } from '../Steps'
@@ -29,7 +29,8 @@ const getFieldNamesForStep = (stepNumber: number): (keyof IUser)[] => {
 
 const Form: React.FC<{ users: IUser }> = ({ users }) => {
 
-  const { currentStep, moveToNextStep, moveToPreviousStep } = useStepsContext()
+  const { currentStep, previousStep, moveToNextStep, moveToPreviousStep } = useStepsContext()
+  const { userApi } = useFormContext()
   const {
     register,
     trigger,
@@ -73,46 +74,28 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
     }
 
   }
-  const StepsField = (step: number) => {
-    switch (step) {
-      case 2:
-        return (
-          <SecondStage
-            errors={errors}
-            clearErrors={clearErrors}
-            users={users}
-            register={register}
-          />
 
-        );
-      case 3:
-        return (
-          <ThirdStage
-            errors={errors}
-            clearErrors={clearErrors}
-            users={users}
-            register={register}
-          />
-        );
-      case 4:
-        return (
-          <>
-            <TravelReasons
-              errors={errors}
-              clearErrors={clearErrors}
-              users={users}
-              register={register}
-            />
-          </>
-        );
-      case 5:
-        return (
-          <TableUser />
-        )
-      default:
-        return null;
-    }
-  };
+  const stepsFields = [
+    <SecondStage
+      errors={errors}
+      clearErrors={clearErrors}
+      users={users}
+      register={register}
+    />,
+    <ThirdStage
+      errors={errors}
+      clearErrors={clearErrors}
+      users={users}
+      register={register}
+    />,
+    <TravelReasons
+      errors={errors}
+      clearErrors={clearErrors}
+      users={users}
+      register={register}
+    />,
+    <TableUser users={userApi} />
+  ];
 
   return (
     <>
@@ -121,7 +104,7 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
       <form onSubmit={handleSubmit(submitValues)}
         className='m-1 p-10 xm:p-0 w-full mx-auto'
       >
-        {StepsField(currentStep)}
+        {stepsFields[currentStep - 2]}
 
         <div className='mt-8 pt-5'>
           <div className='flex justify-between'>

@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
+
 import { useFormContext } from '@/context/FormContext';
 
 import { IUser } from '@/types/types';
@@ -14,11 +16,22 @@ interface ITravelReasons {
 const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, register }) => {
   const { handleInputChange, userApi } = useFormContext();
 
+  const initialAnimation = { scale: 0, opacity: 0 };
+  const scaleIn = { scale: 1, opacity: 1 };
+  const scaleOut = { scale: 0, opacity: 0 };
+  const transition = { duration: 0.6, ease: 'easeInOut' };
+
   return (
+
     <div className="flex items-center flex-col justify-center">
       <p>Travel Reasons</p>
       <div className="flex text-center justify-center items-center mt-2 ">
-        <div className=''>
+        <motion.div
+          initial={initialAnimation}
+          animate={scaleIn}
+          exit={scaleOut}
+          transition={transition}
+        >
           <label className="  inline-flex items-center mr-2">
             <Input
               register={register}
@@ -44,9 +57,14 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
 
           </label>
           {errors && <p className='text-red-500  text-xs'>{errors?.accountType?.message}</p>}
-        </div>
+        </motion.div>
       </div>
-      <div>
+      <motion.div
+        initial={initialAnimation}
+        animate={scaleIn}
+        exit={scaleOut}
+        transition={{ duration: 0.7, ease: 'easeInOut' }}
+      >
         <label className="inline-flex mt-3 items-center">
           <input
             type="checkbox"
@@ -59,7 +77,7 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
           <span className="ml-2 text-gray-700">I accept the terms and conditions</span>
         </label>
         {errors && !users?.termsAccepted && <p className='text-red-500 mt text-xs'>{errors?.termsAccepted?.message}</p>}
-      </div>
+      </motion.div>
     </div>
 
   );
