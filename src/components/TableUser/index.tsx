@@ -4,7 +4,7 @@ import { IUser } from '@/types/types';
 
 export default function TableUser({ users }: { users: IUser }) {
   const data = [users]
-  const userEntries = Object.entries(data[0]).slice(0, -2);
+  const userEntries = Object.entries(data[0]);
 
   const initialAnimation = { scale: 0, opacity: 0 };
   const scaleIn = { scale: 1, opacity: 1 };

@@ -4,7 +4,6 @@ import { UseFormRegister, FieldErrors } from 'react-hook-form';
 import { useFormContext } from '@/context/FormContext';
 
 import { IUser } from '@/types/types';
-import Input from '../Input';
 
 interface ITravelReasons {
   clearErrors?: any
@@ -35,7 +34,6 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
           <label className="  inline-flex items-center mr-2">
             <input
               {...register("accountType")}
-              // error={errors}
               type="radio"
               value="personal"
               name='accountType'
@@ -46,7 +44,6 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
           </label>
           <label className="inline-flex items-center">
             <input
-              // error={errors}
               type="radio"
               value="business"
               {...register("accountType")}
@@ -67,12 +64,12 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
       >
         <label className="inline-flex mt-3 items-center">
           <input
+            required
             type="checkbox"
             className="form-checkbox text-red-500"
             {...register("termsAccepted")}
             name='termsAccepted'
             onChange={(e) => { handleInputChange(e, clearErrors()) }}
-            value={userApi.termsAccepted as string}
           />
           <span className="ml-2 text-gray-700">Accecpt terms and conditions</span>
         </label>

@@ -27,7 +27,7 @@ const SecondStage: React.FC<ISecondStage> = ({ clearErrors, users, register, err
         initial={initialAnimation}
         animate={scaleIn}
         exit={scaleOut}
-        transition={{ delay: 0.1, ...transition }}
+        transition={{ ...transition }}
       >
         <Input
           error={errors.firstName}
