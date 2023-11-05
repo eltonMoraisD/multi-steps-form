@@ -1,5 +1,6 @@
-import { IUser } from '@/types/types';
 import { motion } from 'framer-motion';
+
+import { IUser } from '@/types/types';
 
 export default function TableUser({ users }: { users: IUser }) {
   const data = [users]

@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 import { useFormContext } from '@/context/FormContext';
 
-import Input from '../Input';
 import { IUser } from '@/types/types';
+import Input from '../Input';
 import Combobox from '../Combobox';
 
 

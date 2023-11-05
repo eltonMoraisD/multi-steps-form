@@ -29,7 +29,7 @@ const getFieldNamesForStep = (stepNumber: number): (keyof IUser)[] => {
 
 const Form: React.FC<{ users: IUser }> = ({ users }) => {
 
-  const { currentStep, previousStep, moveToNextStep, moveToPreviousStep } = useStepsContext()
+  const { currentStep, moveToNextStep, moveToPreviousStep } = useStepsContext()
   const { userApi } = useFormContext()
   const {
     register,

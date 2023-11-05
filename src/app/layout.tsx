@@ -4,9 +4,9 @@ import { Inter } from 'next/font/google'
 
 import { FormProvider } from '@/context/FormContext'
 import { StepsProvider } from '@/context/StepsContext'
+import { ComboboxProvider } from '@/context/ComboboxContext'
 
 import Header from '@/components/Header'
-import { ComboboxProvider } from '@/context/ComboboxContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
