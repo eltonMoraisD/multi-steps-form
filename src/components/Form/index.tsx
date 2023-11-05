@@ -22,6 +22,8 @@ const getFieldNamesForStep = (stepNumber: number): (keyof IUser)[] => {
       return ["firstName", "lastName", "email"];
     case 3:
       return ["address", "city", "postcode", "phone", "country"];
+    case 4:
+      return ["accountType", "termsAccepted"];
     default:
       return [];
   }
@@ -77,24 +79,27 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
 
   const stepsFields = [
     <SecondStage
+      key="second"
       errors={errors}
       clearErrors={clearErrors}
       users={users}
       register={register}
     />,
     <ThirdStage
+      key="third"
       errors={errors}
       clearErrors={clearErrors}
       users={users}
       register={register}
     />,
     <TravelReasons
+      key="travelReasons"
       errors={errors}
       clearErrors={clearErrors}
       users={users}
       register={register}
     />,
-    <TableUser users={userApi} />
+    <TableUser key="tableUsers" users={userApi} />
   ];
 
   return (
