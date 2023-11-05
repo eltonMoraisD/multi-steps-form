@@ -10,13 +10,14 @@ export interface IUser {
   city: String;
   postcode: String;
   country: String;
+  accountType: String;
+  termsAccepted: String;
 }
-
 export interface IInputs {
-  placeholder: string;
+  placeholder?: string;
   type: string;
   name: string;
-  defaultValue: String;
+  defaultValue?: String;
   value?: string;
   error: any;
   register: UseFormRegister<string | FieldValues | any>;

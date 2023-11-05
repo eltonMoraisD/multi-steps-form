@@ -24,6 +24,8 @@ const FormProvider = ({ children }: { children: React.ReactNode }) => {
     city: "",
     postcode: "",
     country: "",
+    termsAccepted: "",
+    accountType: ""
   })
 
   const updateUser = (updatedUserData: Partial<IUser>) => {
@@ -33,7 +35,7 @@ const FormProvider = ({ children }: { children: React.ReactNode }) => {
     }));
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, clear: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, clear?: any) => {
     const { name, value } = e.target;
     updateUser({ [name]: value });
     clear

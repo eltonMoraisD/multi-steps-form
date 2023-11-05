@@ -7,11 +7,7 @@ import { userSchema } from './schemaValidations'
 import { IUser } from '@/types/types'
 import { useStepsContext } from '@/context/StepsContext'
 
-import Input from '../Input'
 import Button from '../Button'
-import ComboBox from '../Combobox'
-import { useFormContext } from '@/context/FormContext'
-
 import { steps } from '../Steps'
 import TravelReasons from "../TravelReasons"
 import SecondStage from "../SecondStage"
@@ -31,41 +27,55 @@ const getFieldNamesForStep = (stepNumber: number): (keyof IUser)[] => {
 const Form: React.FC<{ users: IUser }> = ({ users }) => {
 
   const { currentStep, moveToNextStep, moveToPreviousStep } = useStepsContext()
-  const { handleInputChange } = useFormContext()
-
   const {
     register,
     trigger,
     handleSubmit,
-    clearErrors, reset,
-    formState: { errors } } = useForm<IUser>({
-      resolver: zodResolver(userSchema),
-      defaultValues: users,
-    })
+    clearErrors, reset, getValues,
+    formState: { errors }
+  } = useForm<IUser>({
+    resolver: zodResolver(userSchema),
+    defaultValues: users,
+  })
 
   const submitValues: SubmitHandler<IUser> = (data) => {
+    moveToNextStep()
+    getValues().termsAccepted = ""
     console.log("Submit", data);
   }
 
   const prev = () => {
     if (currentStep > 1) {
       moveToPreviousStep()
+      getValues().termsAccepted = ""
       reset(users)
     }
 
   }
+
+  console.log("getvalues", getValues())
+
   const next = async () => {
     const fields = getFieldNamesForStep(currentStep)
-    const output = await trigger(fields, { shouldFocus: true });
+    const valid = await trigger(fields, { shouldFocus: true });
 
-    if (!output) {
+    if (!valid) {
       return
     }
+
+
     if (currentStep < steps.length - 1) {
       moveToNextStep();
-    }
-  }
+      if (currentStep === steps.length - 1) {
+        await handleSubmit(submitValues)()
+        getValues().termsAccepted = ""
+        moveToNextStep();
 
+      }
+    }
+
+  }
+  console.log("current step", currentStep)
   const StepsField = (step: number) => {
     switch (step) {
       case 2:
@@ -86,11 +96,16 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
             users={users}
             register={register}
           />
-        )
+        );
       case 4:
         return (
           <>
-            <TravelReasons />
+            <TravelReasons
+              errors={errors}
+              clearErrors={clearErrors}
+              users={users}
+              register={register}
+            />
           </>
         );
       default:
@@ -99,8 +114,9 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitValues)} className='m-1 p-10 xm:p-0 w-full mx-auto'>
-
+    <form onSubmit={handleSubmit(submitValues)}
+      className='m-1 p-10 xm:p-0 w-full mx-auto'
+    >
       {StepsField(currentStep)}
 
       <div className='mt-8 pt-5'>
@@ -114,7 +130,7 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
           {/*Next Button */}
           <Button
             onClick={next}
-            type={currentStep > steps.length - 1 ? "submit" : "button"}
+            type={currentStep === steps.length - 1 ? "submit" : "button"}
           >
             {currentStep === steps.length - 1 ? "Submit" : <BsArrowRight />}
           </Button>

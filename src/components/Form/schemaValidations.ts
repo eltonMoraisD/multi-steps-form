@@ -11,4 +11,12 @@ export const userSchema = z.object({
   postcode: z.string().min(1, "Type your code"),
   country: z.string().min(1, "Type your country"),
   phone: z.string().regex(phoneRegex, "Invalid country Number"),
+  accountType: z
+    .string()
+    .refine((value) => value === "personal" || value === "business", {
+      message: "Please select an account type: 'personal' or 'business'",
+    }),
+  termsAccepted: z.literal(true, {
+    errorMap: () => ({ message: "You must accept Terms and Conditions." }),
+  }),
 });
