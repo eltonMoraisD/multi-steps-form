@@ -13,7 +13,7 @@ interface ITravelReasons {
 }
 
 const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, register }) => {
-  const { handleInputChange, userApi } = useFormContext();
+  const { handleInputChange } = useFormContext();
 
   const initialAnimation = { scale: 0, opacity: 0 };
   const scaleIn = { scale: 1, opacity: 1 };
@@ -22,7 +22,7 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
 
   return (
 
-    <div className="flex items-center flex-col justify-center">
+    <div className="flex items-center mt-10 flex-col justify-center">
       <p>Travel Reasons</p>
       <div className="flex text-center justify-center items-center mt-2 ">
         <motion.div
@@ -40,7 +40,7 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
               onChange={(e) => { handleInputChange(e, clearErrors()) }}
             />
 
-            <span className="ml-2 mt-2 text-gray-700">Personal</span>
+            <span className="ml-2  text-gray-700">Personal</span>
           </label>
           <label className="inline-flex items-center">
             <input
@@ -50,7 +50,7 @@ const TravelReasons: React.FC<ITravelReasons> = ({ errors, clearErrors, users, r
               name='accountType'
               onChange={(e) => { handleInputChange(e, clearErrors()) }}
             />
-            <span className="ml-2 mt-2 text-gray-700">Business</span>
+            <span className="ml-2  text-gray-700">Business</span>
 
           </label>
           {errors.accountType && <p className='text-red-500  text-xs'>{errors?.accountType?.message}</p>}
