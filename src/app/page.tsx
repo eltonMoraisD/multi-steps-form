@@ -1,10 +1,10 @@
 "use client"
-import { useEffect, useContext } from "react"
-import { fetchUser } from "@/utils/fetchUser"
+import { useEffect } from "react"
 
-import { IFormContext, IStepsContext } from "@/types/types"
-import { StepsContext } from "@/context/StepsContext"
-import { FormContext } from '../context/FormContext'
+import { useStepsContext } from "@/context/StepsContext"
+import { useFormContext } from '../context/FormContext'
+
+import { fetchUser } from "@/utils/fetchUser"
 
 import Spinner from "@/components/Spinner"
 import Form from "@/components/Form"
@@ -12,11 +12,10 @@ import Steps from "@/components/Steps"
 import Wrapper from "@/components/Wrapper"
 
 export default function Home() {
-  const formContex = useContext(FormContext)
-  const stepContext = useContext(StepsContext)
 
-  const { userApi, isLoading, setLoading, updateUser } = formContex as IFormContext
-  const { moveToNextStep, currentStep, } = stepContext as IStepsContext
+  const { userApi, isLoading, setLoading, updateUser } = useFormContext()
+  const { moveToNextStep, currentStep, } = useStepsContext()
+
   useEffect(() => {
     const getUserData = async () => {
       setLoading(true)

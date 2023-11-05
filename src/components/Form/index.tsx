@@ -3,6 +3,8 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
+import toast, { Toaster } from 'react-hot-toast';
+
 import { userSchema } from './schemaValidations'
 import { IUser } from '@/types/types'
 import { useStepsContext } from '@/context/StepsContext'
@@ -32,14 +34,16 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
     register,
     trigger,
     handleSubmit,
-    clearErrors, reset, getValues,
+    clearErrors, reset,
     formState: { errors }
   } = useForm<IUser>({
     resolver: zodResolver(userSchema),
     defaultValues: users,
   })
 
+
   const submitValues: SubmitHandler<IUser> = (data) => {
+    toast.success('successful form submission.');
     moveToNextStep()
     console.log("Submit", data);
   }
@@ -111,30 +115,34 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitValues)}
-      className='m-1 p-10 xm:p-0 w-full mx-auto'
-    >
-      {StepsField(currentStep)}
+    <>
+      <Toaster position="bottom-center" toastOptions={{ success: { duration: 4000 } }} />
 
-      <div className='mt-8 pt-5'>
-        <div className='flex justify-between'>
+      <form onSubmit={handleSubmit(submitValues)}
+        className='m-1 p-10 xm:p-0 w-full mx-auto'
+      >
+        {StepsField(currentStep)}
 
-          {/*Prev Button */}
-          <Button onClick={prev} type="button">
-            <BsArrowLeft />
-          </Button>
+        <div className='mt-8 pt-5'>
+          <div className='flex justify-between'>
 
-          {/*Next Button */}
-          <Button
-            onClick={next}
-            type={currentStep === steps.length - 1 ? "submit" : "button"}
-            disabled={currentStep > steps.length - 1 && true}
-          >
-            {currentStep === steps.length - 1 ? "Submit" : <BsArrowRight />}
-          </Button>
+            {/*Prev Button */}
+            <Button onClick={prev} type="button">
+              <BsArrowLeft />
+            </Button>
+
+            {/*Next Button */}
+            <Button
+              onClick={next}
+              type={currentStep === steps.length - 1 ? "submit" : "button"}
+              disabled={currentStep > steps.length - 1 && true}
+            >
+              {currentStep === steps.length - 1 ? "Submit" : <BsArrowRight />}
+            </Button>
+          </div>
         </div>
-      </div>
-    </form >
+      </form>
+    </>
 
   )
 }
