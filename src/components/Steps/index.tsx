@@ -8,7 +8,7 @@ export default function Steps() {
 
   return (
     <>
-      <div className='flex  justify-center mt-8 mb-6'>
+      <div className='flex max-w-2xl mx-auto w-full p-2 justify-center mt-8 mb-6'>
         <div className='flex  items-center'>
           {steps.map((_, i) => (
             <div key={i} className={`custom-step mx-2 ${currentStep === i + 1 && "active"} `}>

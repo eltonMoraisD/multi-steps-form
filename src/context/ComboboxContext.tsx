@@ -1,5 +1,5 @@
 "use client"
-import { Dispatch, SetStateAction, createContext, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, createContext, useContext, useState, useCallback } from 'react';
 
 import { countries } from "../utils/countries"
 
@@ -27,21 +27,23 @@ const useComboboxContext = () => {
 const ComboboxProvider = ({ children }: {
   children: React.ReactNode
 }) => {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState('Luxembourg');
   const [open, setOpen] = useState(false);
   const [filteredCountries, setFilteredCountries] = useState<string[]>(countries);
 
-  const handleCountryClick = (country: string) => {
+  const handleCountryClick = useCallback((country: string) => {
+    console.log('test')
     setSelected(country);
-  };
+  }, [])
 
-  const handleComboInputChange = (value: string) => {
+  const handleComboInputChange = useCallback((value: string) => {
+    console.log('test')
     setSelected(value);
     const filtered = countries.filter((country) =>
       country.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredCountries(filtered);
-  };
+  }, [])
 
   return (
     <ComboboxContext.Provider

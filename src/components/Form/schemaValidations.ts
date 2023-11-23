@@ -11,7 +11,7 @@ export const userSchema = z.object({
   postcode: z.string().min(1, "*required"),
   country: z.string().min(1, "*required"),
   phone: z.string().regex(phoneRegex, "Invalid country Number"),
-  accountType: z
+  accountType: z.coerce
     .string()
     .refine((value) => value === "personal" || value === "business", {
       message: "Please select an account type: 'personal' or 'business'",

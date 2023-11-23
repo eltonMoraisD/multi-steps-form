@@ -27,7 +27,7 @@ body {
 }
 
 .step {
-  @apply w-10 h-10 xm:w-8 xm:h-8 flex z-10 relative  text-white  bg-blue-900 rounded-full items-center justify-center font-semibold;
+  @apply w-8 h-8  flex z-10 relative  text-white  bg-blue-900 rounded-full items-center justify-center font-semibold;
 }
 
 .active .step{

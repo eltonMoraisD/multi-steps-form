@@ -4,16 +4,12 @@ import logo from '../../assets/logo.png'
 
 export default function Header() {
   return (
-    <header className='w-full xm:h-40 bg-slate-100 flex items-center justify-center'>
-      <div className='container justify-center  items-center mx-auto'>
-        <div className='w-full text-center '>
-          <div className=' lg:flex text-center p-10 lg:items-center lg:justify-center lg:text-center sm:flex sm:items-center sm:justify-between sm:text-center'>
-            <Image className='mt-2 xm:mt-10  xm:w-[80px] xm:h-[90px] xm:ml-24' src={logo} alt='logo' />
-            <p className='m-6  xm:mb-10 lg:text-4xl lg:mt-16 md:mt-16 md:text-2xl sm:mt-20 sm:text-lg font-semibold text-blue-900'>
-              Multi step form
-            </p>
-          </div>
-        </div>
+    <header className='bg-slate-100  py-6 w-full'>
+      <div className='flex max-w-2xl mx-auto flex-col lg:justify-between sm:flex-row items-center justify-center gap-6'>
+        <Image className='w-20 h-[90px]' src={logo} alt='logo' />
+        <span className='text-2xl  font-semibold text-blue-900'>
+          Multi step form
+        </span>
       </div>
     </header>
   )

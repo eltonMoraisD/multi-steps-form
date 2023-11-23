@@ -101,7 +101,6 @@ const Form: React.FC<{ users: IUser }> = ({ users }) => {
     />,
     <TableUser key="tableUsers" users={userApi} />
   ];
-
   return (
     <>
       <Toaster position="bottom-center" toastOptions={{ success: { duration: 4000 } }} />

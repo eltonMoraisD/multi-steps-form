@@ -88,7 +88,7 @@ const ThirdStage: React.FC<IThirdStage> = ({ clearErrors, users, register, error
           name="country"
           type="text"
           placeholder="Country"
-          defaultValue={users.country}
+          defaultValue={"Luxembourg"}
           onChange={(e) => { handleInputChange(e, clearErrors()) }}
         />
       </motion.div>
